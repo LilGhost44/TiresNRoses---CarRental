@@ -1,6 +1,6 @@
-package V2_1;
+package V2.Models;
 
-import java.time.LocalDate;
+import V2.utils.enums.*;
 
 public class Rental {
     private int rentalID;
@@ -8,9 +8,9 @@ public class Rental {
     private int carID;
     private int operatorID;
 
-    private LocalDate rentDate;
-    private LocalDate expectedReturnDate;
-    private LocalDate returnDate;
+    private String rentDate;
+    private String expectedReturnDate;
+    private String returnDate;
 
     private int initialMileage;
     private int returnMileage;
@@ -20,7 +20,7 @@ public class Rental {
 
     //constructor
 
-    public Rental(int rentalID, int clientID, int carID, int operatorID, LocalDate rentDate, LocalDate returnDate, int initialMileage, RentalStatus rentalStatus) {
+    public Rental(int rentalID, int clientID, int carID, int operatorID, String rentDate, String returnDate, int initialMileage, RentalStatus rentalStatus) {
         this.rentalID = rentalID;
         this.clientID = clientID;
         this.carID = carID;
@@ -35,87 +35,66 @@ public class Rental {
     public int getRentalID() {
         return rentalID;
     }
-
     public void setRentalID(int rentalID) {
         this.rentalID = rentalID;
     }
-
     public int getClientID() {
         return clientID;
     }
-
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }
-
     public int getCarID() {
         return carID;
     }
-
     public void setCarID(int carID) {
         this.carID = carID;
     }
-
     public int getOperatorID() {
         return operatorID;
     }
-
     public void setOperatorID(int operatorID) {
         this.operatorID = operatorID;
     }
-
-    public LocalDate getRentDate() {
+    public String getRentDate() {
         return rentDate;
     }
-
-    public void setRentDate(LocalDate rentDate) {
+    public void setRentDate(String rentDate) {
         this.rentDate = rentDate;
     }
-
-    public LocalDate getExpectedReturnDate() {
+    public String getExpectedReturnDate() {
         return expectedReturnDate;
     }
-
-    public void setExpectedReturnDate(LocalDate expectedReturnDate) {
+    public void setExpectedReturnDate(String expectedReturnDate) {
         this.expectedReturnDate = expectedReturnDate;
     }
-
-    public LocalDate getReturnDate() {
+    public String getReturnDate() {
         return returnDate;
     }
-
-    public void setReturnDate(LocalDate returnDate) {
+    public void setReturnDate(String returnDate) {
         this.returnDate = returnDate;
     }
-
     public int getInitialMileage() {
         return initialMileage;
     }
-
     public void setInitialMileage(int initialMileage) {
         this.initialMileage = initialMileage;
     }
-
     public int getReturnMileage() {
         return returnMileage;
     }
-
     public void setReturnMileage(int returnMileage) {
         this.returnMileage = returnMileage;
     }
-
     public double getTotalCost() {
         return totalCost;
     }
-
     public void setTotalCost(double totalCost) {
         this.totalCost = totalCost;
     }
-
     public RentalStatus getRentalStatus() {
         return rentalStatus;
     }
-
     public void setRentalStatus(RentalStatus rentalStatus) {
         this.rentalStatus = rentalStatus;
     }

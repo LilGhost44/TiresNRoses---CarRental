@@ -2,21 +2,18 @@ package V2.Models;
 
 import V2.utils.enums.*;
 
-public class User {
+public class RentACarOperator {
     //attributes
     private int userID;
     private String username;
-    private Role role;
-
-    //constructor
-    public User(){};
-    public User(int userID, String username,  Role role) {
+    private Role role;  // OPERATOR
+   //constructor
+    public RentACarOperator(int userID, String username,  Role role) {
         this.userID = userID;
         this.username = username;
         this.role = role;
     }
-
-    //Getter n Setters
+    //Getters n Setters
     public int getUserID() {
         return userID;
     }

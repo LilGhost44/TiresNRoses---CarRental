@@ -1,4 +1,7 @@
-package V2_1;
+package V2.Models;
+
+
+import V2.utils.enums.*;
 
 public class Car {
     //attributes
@@ -6,7 +9,7 @@ public class Car {
     private String brand;
     private String model;
     private int year;
-    private Class carClass;
+    private CarClass carClass;
     private Category category;
     private boolean smokingAllowed;
     private double dailyRate;
@@ -20,7 +23,7 @@ public class Car {
     //constructor
     public Car() { //For DB
     }
-    public Car(int carID, String brand, String model, int year, Class carClass, Category category, boolean smokingAllowed, double dailyRate, double kmRate, int mileage, Status status, String pricturePath) {
+    public Car(int carID, String brand, String model, int year, CarClass carClass, Category category, boolean smokingAllowed, double dailyRate, double kmRate, int mileage, Status status, String pricturePath) {
         this.carID = carID;
         this.brand = brand;
         this.model = model;
@@ -69,11 +72,11 @@ public class Car {
         this.year = year;
     }
 
-    public Class getCarClass() {
+    public CarClass getCarClass() {
         return carClass;
     }
 
-    public void setCarClass(Class carClass) {
+    public void setCarClass(CarClass carClass) {
         this.carClass = carClass;
     }
 

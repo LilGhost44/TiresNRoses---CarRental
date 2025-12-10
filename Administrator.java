@@ -1,29 +1,26 @@
-package V2_1;
+package V2.Models;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import V2.utils.enums.*;
 
 public class Administrator {
-    private int userId;
 
-     private String username;
-private Role role;
-
-    public Administrator(int userId, String username, Role role) {
-        this.userId = userId;
+    //attributes
+    private int userID;
+    private String username;
+    private Role role;
+    //constructor
+    public Administrator(int userID, String username, Role role) {
+        this.userID = userID;
         this.username = username;
         this.role = role;
     }
-
-    public int getUserId() {
-        return userId;
+    //Getters n Setters
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {
@@ -42,4 +39,3 @@ private Role role;
         this.role = role;
     }
 }
-

@@ -1,7 +1,7 @@
-package V2_1;
+package V2.utils.enums;
 
 public enum RentalStatus {
     ACTIVE,
     COMPLETED,
-    LATE //?
+    LATE
 }
