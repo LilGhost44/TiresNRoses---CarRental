@@ -9,7 +9,11 @@ import V2.Database.*;
 public class OperatorService {
 
     public void registerClient(Client client) {
+
         DBQueries.insertClient(client);
+        if(client.getRating()>5){
+            System.out.println("Caution: Risky Client with rating: "+client.getRating());
+        }
     }  //Register Client to Database
 
     public void startRental(Rental rental, ConditionReport startReport) {
@@ -18,14 +22,18 @@ public class OperatorService {
         DBQueries.updateCarStatus(rental.getCarID(), "RENTED");    //New rental, change status to Rented
     }
 
-    public void endRental(int rentalId, ConditionReport endReport, List<Damage> damages) { //As in car return
+    public void endRental(Rental rental,int rentalId, ConditionReport endReport, List<Damage> damages) { //As in car return
         DBQueries.insertConditionReport(endReport);
 
         for (Damage d : damages) {
             DBQueries.insertDamage(d);
+
         }
 
-        DBQueries.completeRental(rentalId, endReport, damages);
+
+        DBQueries.completeRental(rentalId, endReport,rental);
+        DBQueries.updateCarStatus(rental.getCarID(), "AVAILABLE");
+
     }
     public void registerCar(Car car, CarCharacteristics ch) {
         DBQueries.insertCar(car);
@@ -41,11 +49,12 @@ public class OperatorService {
                 return cost;
             case MINOR:
                 double minorPenalty = 100;
-                break;
+                return cost + minorPenalty;
             case MAJOR:
                 double majorPenalty = 500;
-                break;
+                return  cost+majorPenalty;
         }
+
         return cost;
     }
     private double getDailyRate(Category category) {
