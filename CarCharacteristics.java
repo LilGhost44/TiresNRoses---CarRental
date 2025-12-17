@@ -9,6 +9,7 @@ public class CarCharacteristics {
 
 
     //constructor
+    public CarCharacteristics(){};
     public CarCharacteristics(int carID, String fuelType, String gearBox, int horsepower, String color) {
         this.carID = carID;
         this.fuelType = fuelType;

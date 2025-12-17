@@ -9,6 +9,7 @@ public class Client {
     private double rating; //To determine risky client
 
     //constructor
+    public Client(){};
     public Client(int clientID, String name, String phone, String email, double rating) {
         this.clientID = clientID;
         this.name = name;

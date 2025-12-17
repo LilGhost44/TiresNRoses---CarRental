@@ -12,6 +12,7 @@ public class ConditionReport {
     private ReportStage stage;
 
     //constructor
+    public ConditionReport(){};
     public ConditionReport(int reportID, int rentalID, String scratches, String interiorDamage, String tireCondition, String notes, ReportStage stage) {
         this.reportID = reportID;
         this.rentalID = rentalID;

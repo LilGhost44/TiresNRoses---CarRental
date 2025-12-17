@@ -16,14 +16,14 @@ public class Car {
     private double kmRate;
     private int mileage;
     private Status status;
-    private String pricturePath; //For pictures (Review Later)
+
 
     private CarCharacteristics characteristics;
 
     //constructor
     public Car() { //For DB
     }
-    public Car(int carID, String brand, String model, int year, CarClass carClass, Category category, boolean smokingAllowed, double dailyRate, double kmRate, int mileage, Status status, String pricturePath) {
+    public Car(int carID, String brand, String model, int year, CarClass carClass, Category category, boolean smokingAllowed, double dailyRate, double kmRate, int mileage, Status status) {
         this.carID = carID;
         this.brand = brand;
         this.model = model;
@@ -35,7 +35,6 @@ public class Car {
         this.kmRate = kmRate;
         this.mileage = mileage;
         this.status = status;
-        this.pricturePath = pricturePath;
 
     }
 
@@ -96,6 +95,7 @@ public class Car {
         this.smokingAllowed = smokingAllowed;
     }
 
+
     public double getDailyRate() {
         return dailyRate;
     }
@@ -128,13 +128,7 @@ public class Car {
         this.status = status;
     }
 
-    public String getPricturePath() {
-        return pricturePath;
-    }
 
-    public void setPricturePath(String pricturePath) {
-        this.pricturePath = pricturePath;
-    }
 
     public CarCharacteristics getCharacteristics() {
         return characteristics;

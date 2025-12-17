@@ -2,15 +2,18 @@ package V2.Models;
 
 import V2.utils.enums.*;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 public class Rental {
     private int rentalID;
     private int clientID;
     private int carID;
     private int operatorID;
 
-    private String rentDate;
-    private String expectedReturnDate;
-    private String returnDate;
+    private LocalDate rentDate;
+    private LocalDate expectedReturnDate;
+    private LocalDate returnDate;
 
     private int initialMileage;
     private int returnMileage;
@@ -19,16 +22,18 @@ public class Rental {
     private RentalStatus rentalStatus;
 
     //constructor
-
-    public Rental(int rentalID, int clientID, int carID, int operatorID, String rentDate, String returnDate, int initialMileage, RentalStatus rentalStatus) {
+    public Rental(){};
+    public Rental(int rentalID, int clientID, int carID, int operatorID, LocalDate rentDate, LocalDate returnDate,LocalDate expectedReturnDate, int initialMileage, RentalStatus rentalStatus,double totalCost) {
         this.rentalID = rentalID;
         this.clientID = clientID;
         this.carID = carID;
         this.operatorID = operatorID;
         this.rentDate = rentDate;
         this.returnDate = returnDate;
+        this.expectedReturnDate = expectedReturnDate;
         this.initialMileage = initialMileage;
         this.rentalStatus = rentalStatus;
+        this.totalCost = totalCost;
     }
     //Getter n Setter
 
@@ -56,22 +61,22 @@ public class Rental {
     public void setOperatorID(int operatorID) {
         this.operatorID = operatorID;
     }
-    public String getRentDate() {
+    public LocalDate getRentDate() {
         return rentDate;
     }
-    public void setRentDate(String rentDate) {
+    public void setRentDate(LocalDate rentDate) {
         this.rentDate = rentDate;
     }
-    public String getExpectedReturnDate() {
+    public LocalDate getExpectedReturnDate() {
         return expectedReturnDate;
     }
-    public void setExpectedReturnDate(String expectedReturnDate) {
+    public void setExpectedReturnDate(LocalDate expectedReturnDate) {
         this.expectedReturnDate = expectedReturnDate;
     }
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
-    public void setReturnDate(String returnDate) {
+    public void setReturnDate(LocalDate returnDate) {
         this.returnDate = returnDate;
     }
     public int getInitialMileage() {
