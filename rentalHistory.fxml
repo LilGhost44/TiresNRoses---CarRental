@@ -1,0 +1,29 @@
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.RentalHistoryController">
+
+    <Label text="Rental History Report" style="-fx-font-size: 16px;" />
+
+    <TableView fx:id="historyTable">
+        <columns>
+            <TableColumn fx:id="rentalIdCol" text="Rental #"/>
+            <TableColumn fx:id="brandCol" text="Brand"/>
+            <TableColumn fx:id="modelCol" text="Model"/>
+            <TableColumn fx:id="clientCol" text="Client"/>
+            <TableColumn fx:id="rentDateCol" text="From"/>
+            <TableColumn fx:id="expectedReturnCol" text="Expected Return"/>
+            <TableColumn fx:id="returnDateCol" text="To"/>
+            <TableColumn fx:id="costCol" text="Total Cost"/>
+            <TableColumn fx:id="statusCol" text="Status"/>
+
+        </columns>
+    </TableView>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

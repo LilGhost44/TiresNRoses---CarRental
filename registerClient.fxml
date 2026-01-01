@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.RegisterClientController">
+
+    <Label text="Register Client" style="-fx-font-size: 16px;" />
+
+    <TextField fx:id="clientID">ID: </TextField>
+    <TextField fx:id="clientName">Name: </TextField>
+    <TextField fx:id="clientPhone">Phone: </TextField>
+    <TextField fx:id="clientEmail">Email: </TextField>
+    <TextField fx:id="clientRating">Rating: </TextField>
+
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

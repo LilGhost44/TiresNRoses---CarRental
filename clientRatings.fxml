@@ -1,0 +1,22 @@
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.ClientRatingsController">
+
+    <Label text="Client Ratings Report" style="-fx-font-size: 16px;" />
+
+    <TableView fx:id="ratingTable">
+        <columns>
+            <TableColumn fx:id="idCol" text="Client ID"/>
+            <TableColumn fx:id="nameCol" text="Client Name"/>
+            <TableColumn fx:id="ratingCol" text="Rating"/>
+        </columns>
+    </TableView>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

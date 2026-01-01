@@ -1,7 +1,7 @@
-package V2.Models;
+package Models;
 
 
-import V2.utils.enums.*;
+import enums.*;
 
 public class Car {
     //attributes

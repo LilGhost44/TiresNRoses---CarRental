@@ -1,8 +1,8 @@
-package V2.Models;
+package Models;
 
-import V2.utils.enums.*;
 
-import java.sql.Date;
+import enums.RentalStatus;
+
 import java.time.LocalDate;
 
 public class Rental {
@@ -23,14 +23,14 @@ public class Rental {
 
     //constructor
     public Rental(){};
-    public Rental(int rentalID, int clientID, int carID, int operatorID, LocalDate rentDate, LocalDate returnDate,LocalDate expectedReturnDate, int initialMileage, RentalStatus rentalStatus,double totalCost) {
+    public Rental(int rentalID, int clientID, int carID, int operatorID, LocalDate rentDate,LocalDate expectedReturnDate ,LocalDate returnDate, int initialMileage, RentalStatus rentalStatus,double totalCost) {
         this.rentalID = rentalID;
         this.clientID = clientID;
         this.carID = carID;
         this.operatorID = operatorID;
         this.rentDate = rentDate;
-        this.returnDate = returnDate;
         this.expectedReturnDate = expectedReturnDate;
+        this.returnDate = returnDate;
         this.initialMileage = initialMileage;
         this.rentalStatus = rentalStatus;
         this.totalCost = totalCost;

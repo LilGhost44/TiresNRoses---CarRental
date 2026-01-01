@@ -1,18 +1,23 @@
-package V2.Service;
+package service;
 
-import V2.utils.enums.*;
-import V2.Models.*;
-import V2.Database.DBQueries;
+import Database.DBQueries;
+import Models.Company;
+import Models.User;
+import enums.Role;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class AdminService {
+    private static final Logger logger = LogManager.getLogger(AdminService.class);
+
     //create Rent a Car company
-    public Company createCompany(String name,int id) {
+    public Company createCompany(String name, int id) {
         Company company = new Company();
         company.setName(name);
         DBQueries.insertCompany(company);
         company.setCompanyID(id);
-        System.out.println("Company created successfully: " + company.getName());
+       logger.info("Company created successfully: " + company.getName());
         return company;
     }
     //create operator
@@ -22,8 +27,20 @@ public class AdminService {
         user.setRole(Role.OPERATOR);
         user.setUserID(id);
         DBQueries.insertUser(user);
-        System.out.println("Operator created with ID: " + id);
+        logger.info("Operator created with ID: " + id);
         return user;
+    }
+
+
+        //authentication of admin
+
+        public static boolean authenticate(int id, String username) {
+            boolean exists = DBQueries.adminExists(id, username);
+            if (!exists) {
+                logger.warn("Authentication failed for user {}", username);
+            }
+            return exists;
+
     }
 
 

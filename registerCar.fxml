@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.RegisterCarController">
+
+    <Label text="Register Car" style="-fx-font-size: 16px;" />
+
+    <TextField fx:id="carID">ID: </TextField>
+    <TextField fx:id="carBrand">Brand: </TextField>
+    <TextField fx:id="carModel">Model: </TextField>
+    <TextField fx:id="carYear">Manufactured Year: </TextField>
+
+    <ComboBox fx:id="carClassBox"
+              promptText="Select car class"
+              prefWidth="200"/>
+
+    <ComboBox fx:id="carCategoryBox"
+              promptText="Select car category"
+              prefWidth="200"/>
+
+
+    <CheckBox fx:id="carSmoking" text="Smoking Allowed"/>
+    <TextField fx:id="carDailyRate">Daily Rate: </TextField>
+    <TextField fx:id="carKmRate">Rate on km: </TextField>
+    <TextField fx:id="carMileage">Mileage: </TextField>
+
+    <ComboBox fx:id="carStatusBox"
+              promptText="Select car status"
+              prefWidth="200"/>
+
+    <Label text="Register Characteristics" style="-fx-font-size: 16px;" />
+
+    <TextField fx:id="carFuelType">Fuel Type: </TextField>
+    <TextField fx:id="carGearBox">GearBox: </TextField>
+    <TextField fx:id="carHorsePower">Horsepower: </TextField>
+    <TextField fx:id="carColor">Color: </TextField>
+
+
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

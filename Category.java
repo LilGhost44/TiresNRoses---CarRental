@@ -1,4 +1,4 @@
-package V2.utils.enums;
+package enums;
 
 public enum Category {
     SEDAN,

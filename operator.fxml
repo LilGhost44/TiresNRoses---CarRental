@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.OperatorController">
+
+    <Label text="Operator Dashboard" style="-fx-font-size: 16px;" />
+
+    <Button text="Register Client" onAction="#handleRegisterClient"/>
+    <Button text="Register Car" onAction="#handleRegisterCar"/>
+    <Button text="Start Rental" onAction="#handleStartRental"/>
+    <Button text="End Rental" onAction="#handleEndRental"/>
+    <Button text="Database Reports" onAction="#handleDatabaseReports"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

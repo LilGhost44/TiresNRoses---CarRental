@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.AvailableCarsController">
+
+    <Label text="Available Cars Report" style="-fx-font-size: 16px;" />
+
+    <TableView fx:id="carTable">
+        <columns>
+            <TableColumn text="ID" fx:id="idCol"/>
+            <TableColumn text="Brand" fx:id="brandCol"/>
+            <TableColumn text="Model" fx:id="modelCol"/>
+            <TableColumn text="Daily Rate" fx:id="dailyRateCol"/>
+        </columns>
+    </TableView>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

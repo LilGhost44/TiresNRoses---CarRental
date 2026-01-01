@@ -1,4 +1,4 @@
-package V2.Models;
+package Models;
 
 public class Client {
     //attributes

@@ -1,0 +1,22 @@
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.CarStatisticsController">
+
+    <Label text="Car Statistics Report" style="-fx-font-size: 16px;" />
+
+    <TableView fx:id="statsTable">
+        <columns>
+            <TableColumn fx:id="brandCol" text="Brand"/>
+            <TableColumn fx:id="modelCol" text="Model"/>
+            <TableColumn fx:id="timesRentedCol" text="Times Rented"/>
+        </columns>
+    </TableView>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

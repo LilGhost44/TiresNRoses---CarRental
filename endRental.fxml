@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.EndRentalController">
+
+    <Label text="End Rental" style="-fx-font-size: 16px;" />
+
+    <TextField fx:id="endRentalID">ID: </TextField>
+    <TextField fx:id="endReportID">Report ID: </TextField>
+    <TextField fx:id="returnDate">Return Date: </TextField>
+    <TextField fx:id="returnMileage">Final Mileage: </TextField>
+
+    <Label text="Final Condition Report" style="-fx-font-size: 16px;" />
+
+    <TextField fx:id="scratches">Scratches: </TextField>
+    <TextField fx:id="interiorDamage">Interior Damage: </TextField>
+    <TextField fx:id="tireCondition">Tire Condition: </TextField>
+    <TextField fx:id="notes">Notes: </TextField>
+    <ComboBox fx:id="reportStageComboBox"
+              promptText="Select report stage"
+              prefWidth="200"/>
+    <ComboBox fx:id="damageLevelComboBox"
+              promptText="Select damage level"
+              prefWidth="200"/>
+
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>
+

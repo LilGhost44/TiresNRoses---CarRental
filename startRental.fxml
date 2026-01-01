@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.StartRentalController">
+
+    <Label text="Start Rental" style="-fx-font-size: 16px;" />
+
+    <TextField fx:id="rentalID">ID: </TextField>
+    <TextField fx:id="clientID">Client ID: </TextField>
+    <TextField fx:id="carID">Car ID: </TextField>
+    <TextField fx:id="operatorID">Operator ID: </TextField>
+    <TextField fx:id="rentDate">Start Date: </TextField>
+    <TextField fx:id="expectedReturnDate">Expected Return Date: </TextField>
+    <TextField fx:id="returnDate">Return Date: </TextField>
+    <TextField fx:id="initMileage">Initial Mileage: </TextField>
+
+    <ComboBox fx:id="rentalStatusComboBox"
+              promptText="Select rental status"
+              prefWidth="200"/>
+
+    <TextField fx:id="totalCost">Cost: </TextField>
+
+    <Label text="Condition Report" style="-fx-font-size: 16px;" />
+    <TextField fx:id="reportID">ID: </TextField>
+    <TextField fx:id="scratches">Scratches: </TextField>
+    <TextField fx:id="interiorDamage">Interior Damage: </TextField>
+    <TextField fx:id="tireCondition">Tire Condition: </TextField>
+    <TextField fx:id="notes">Notes: </TextField>
+
+    <ComboBox fx:id="reportStageComboBox"
+              promptText="Select report stage"
+              prefWidth="200"/>
+
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

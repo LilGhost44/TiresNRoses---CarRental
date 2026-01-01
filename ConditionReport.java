@@ -1,5 +1,5 @@
-package V2.Models;
-import V2.utils.enums.ReportStage;
+package Models;
+import enums.*;
 
 public class ConditionReport {
     //attributes

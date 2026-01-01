@@ -1,0 +1,26 @@
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.OperatorHistoryController">
+
+    <Label text="Operator Activity Report" style="-fx-font-size: 16px;" />
+
+    <TableView fx:id="activityTable">
+        <columns>
+            <TableColumn fx:id="operatorIdCol" text="Operator ID"/>
+            <TableColumn fx:id="operatorCol" text="Operator"/>
+            <TableColumn fx:id="rentalIdCol" text="Rental #"/>
+            <TableColumn fx:id="rentDateCol" text="Rent Date"/>
+            <TableColumn fx:id="costCol" text="Total Cost"/>
+            <TableColumn fx:id="statusCol" text="Status"/>
+
+        </columns>
+    </TableView>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>

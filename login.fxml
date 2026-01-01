@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="25" alignment="CENTER"
+xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.LoginController"
+>
+
+    <Label text="Tyres And Roses" style="-fx-font-size: 18px;"/>
+    <Button text="Login as Administrator" onAction="#handleAdminLogin"/>
+    <Button text="Login as Operator" onAction="#handleOperatorLogin"/>
+
+
+</VBox>
+
+
+
+
+
+
+
+
+

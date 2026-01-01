@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.AuthenticateAdminController"
+>
+
+    <Label text="Authentication Page" style="-fx-font-size: 18px;"/>
+    <TextField fx:id="name" promptText="Name" />
+    <TextField fx:id="ID" promptText="ID"/>
+    <Button text="Submit" onAction="#handleSubmit"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+
+
+</VBox>

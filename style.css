@@ -1,0 +1,25 @@
+.root {
+    -fx-font-family: "Segoe UI";
+    -fx-background-color: #f4f6f8;
+}
+
+.label {
+    -fx-font-size: 14px;
+}
+
+.text-field, .combo-box {
+    -fx-pref-height: 36px;
+    -fx-background-radius: 6;
+}
+
+.button {
+    -fx-background-color: #2f80ed;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 6;
+    -fx-padding: 8 18;
+}
+
+.button:hover {
+    -fx-background-color: #256bd1;
+}

@@ -1,76 +1,78 @@
-package V2.Service;
+package service;
 
 
-import V2.utils.enums.*;
-import V2.Models.*;
+import Database.*;
+import Models.*;
+import enums.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.time.LocalDate;
-import java.util.List;
-import V2.Database.*;
 
 public class OperatorService {
+    private static final Logger logger = LogManager.getLogger(OperatorService.class);
 
     public void registerClient(Client client) {
 
         if(DBQueries.insertClient(client)>0){
-            System.out.println("Client registration completed: " +client.getName()+" with id: "+client.getClientID());
-        }else{System.out.println("Client registration failed.");}
+            logger.info("Client registration completed: " +client.getName()+" with id: "+client.getClientID());
+        }else{logger.warn("Client registration failed.");}
 
         if(client.getRating()>5){
-            System.out.println("Caution: Risky Client with rating: "+client.getRating());
+            logger.warn("Caution: Risky Client with rating: "+client.getRating());
         }
     }  //Register Client to Database
 
     public void startRental(Rental rental, ConditionReport startReport) {
         if(DBQueries.insertRental(rental)>0){
-            System.out.println("Rental started. ID: "+rental.getRentalID());
-        }else{System.out.println("Rental failed to start.");}
+            logger.info("Rental started. ID: "+rental.getRentalID());
+        }else{logger.error("Rental failed to start.");}
         if(DBQueries.insertConditionReport(startReport)>0){
             DBQueries.updateCarStatus(rental.getCarID(), "RENTED");    //New rental, change status to Rented
-            System.out.println("Condition report created.");}
-        else{System.out.println("Condition report failed.");};
+            logger.info("Condition report created.");}
+        else{logger.error("Condition report failed.");};
 
     }
 
-    public void endRental(Rental rental, ConditionReport endReport, List<Damage> damage, LocalDate returnDate,Double cost) { //As in car return
+    public void endRental(Rental rental, ConditionReport endReport, LocalDate returnDate,Double cost) { //As in car return
         DBQueries.insertConditionReport(endReport);
 
-        for (Damage d : damage) {
+        /*for (Damage d : damage) {
             if(DBQueries.insertDamage(d)>0){System.out.println("Damage registered.");}
-            else{System.out.println("Damage registration failed.");}};
+            else{System.out.println("Damage registration failed.");}};*/
 
 
 
-        if(DBQueries.completeRental(rental, endReport,damage)>0){
-            System.out.println("Rental Completed.");
-        }else{System.out.println("Rental completion failed.");}
+        if(DBQueries.completeRental(rental, endReport)>0){
+            logger.info("Rental Completed.");
+        }else{logger.warn("Rental completion failed.");}
         if(DBQueries.updateCarStatus(rental.getCarID(), "AVAILABLE")>0){
-            System.out.println("Car status update to AVAILABLE.");
-        }else{System.out.println("Status update failed.");} //set car to AVAILABLE
+            logger.info("Car status update to AVAILABLE.");
+        }else{logger.warn("Status update failed.");} //set car to AVAILABLE
         if(DBQueries.updateRentalStatus(rental.getRentalID())>0){
-            System.out.println("Rental status set to COMPLETED.");
-        }else{System.out.println("Status did not get updated.");} //set rental to COMPLETED
+            logger.info("Rental status set to COMPLETED.");
+        }else{logger.warn("Status did not get updated.");} //set rental to COMPLETED
         if(DBQueries.updateReturnDate(rental.getRentalID(), returnDate)>0){
             rental.setReturnDate(returnDate);
-            System.out.println("Return date updated: "+returnDate);
-        }else{System.out.println("Return date did not get updated.");} //update with the actual returnDate
+            logger.info("Return date updated: "+returnDate);
+        }else{logger.warn("Return date did not get updated.");} //update with the actual returnDate
         if(DBQueries.updateCost(rental.getRentalID(),cost)>0){
             rental.setTotalCost(cost);
-            System.out.println("Return date updated: "+returnDate);
-        }else{System.out.println("Return date did not get updated.");} //update with the actual returnDate
+            logger.info("Cost updated: "+cost);
+        }else{logger.warn("Cost did not get updated.");} //update with the actual returnDate
 
         if (rental.getReturnDate()
                 .isAfter(rental.getExpectedReturnDate())) {
-            System.out.println("Caution: This rental is expired!!!");
+            logger.warn("Caution: This rental is expired!!!");
             DBQueries.increaseClientRating(rental.getClientID(), 2);
         }
 
     }
     public void registerCar(Car car, CarCharacteristics ch) {
-        if(DBQueries.insertCar(car)>0){System.out.println("Car registration complete. ID: "+car.getCarID()+" ,Details: "+car.getBrand()+" ,"+car.getModel());}
-       else{System.out.println("Car registration failed.");}
-        if(DBQueries.insertCarCharacteristics(ch)>0){System.out.println("Car characteristics registration comoplete.");}
-        else{System.out.println("Car characteristics registration failed.");}
+        if(DBQueries.insertCar(car)>0){logger.info("Car registration complete. ID: "+car.getCarID()+" ,Details: "+car.getBrand()+" ,"+car.getModel());}
+       else{logger.error("Car registration failed.");}
+        if(DBQueries.insertCarCharacteristics(ch)>0){logger.info("Car characteristics registration complete.");}
+        else{logger.error("Car characteristics registration failed.");}
     }
     public double taxCalculator(Car car, int rentalDays, int mileage, DamageLevel damageLevel) {
         double base = getDailyRate(car.getCategory());
@@ -107,5 +109,14 @@ public class OperatorService {
              case CITY: return 1.20;
              default: return 0;
         }
+    }
+    //authentication of operator
+    public static boolean authenticate(int id, String username) {
+        boolean exists = DBQueries.operatorExists(id, username);
+        if (!exists) {
+            logger.warn("Authentication failed for user {}", username);
+        }
+        return exists;
+
     }
 }

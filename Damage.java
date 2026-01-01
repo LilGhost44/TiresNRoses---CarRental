@@ -1,6 +1,6 @@
-package V2.Models;
+package Models;
 
-import V2.utils.enums.DamageLevel;
+import enums.*;
 
 public class Damage {
     private int damageID;

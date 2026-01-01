@@ -1,0 +1,21 @@
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controller.DatabaseReportsController"
+>
+
+    <Label text="Database Reports" style="-fx-font-size: 18px;"/>
+    <Button text="Available Cars" onAction="#handleAvailableCars"/>
+    <Button text="Car Statistics" onAction="#handleCarStatistics"/>
+    <Button text="Client Ratings" onAction="#handleClientRatings"/>
+    <Button text="Rental History" onAction="#handleRentalHistory"/>
+    <Button text="Operator Activity" onAction="#handleOperatorActivity"/>
+    <Button text="Back" onAction="#handleBack"/>
+
+</VBox>
