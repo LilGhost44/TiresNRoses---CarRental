@@ -1,16 +1,18 @@
 package controller;
 
 
-import Database.DBQueries;
-import Models.Car;
-import Models.ClientRating;
-import Models.Rental;
-import Models.RentedCarStatistics;
+
+import Database.jpa.get;
+import javafx.collections.FXCollections;
+import models.jpa.ClientRating;
 import application.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import models.jpa.JPARentedCarStatistics;
+
+import java.util.List;
 
 
 public class ClientRatingsController {
@@ -28,8 +30,9 @@ public class ClientRatingsController {
 
         loadRatings();
     }
-    private void loadRatings(){
-        ratingTable.getItems().setAll(DBQueries.reportClientRatings());
+    private void loadRatings() {
+        List<ClientRating> ratings = get.getClientRating();
+        ratingTable.setItems(FXCollections.observableArrayList(ratings));
     }
     public void handleBack(){
         try{

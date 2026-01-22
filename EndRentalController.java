@@ -1,21 +1,22 @@
 package controller;
-import Database.DBQueries;
-import Models.Car;
-import Models.ConditionReport;
-import Models.Damage;
-import Models.Rental;
+import Database.jdbc.DBQueries;
+import models.jdbc.Car;
+import models.jdbc.ConditionReport;
+import models.jdbc.Rental;
 import application.MainApp;
-import enums.CarClass;
-import enums.Category;
 import enums.ReportStage;
 import enums.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import models.jpa.JPACar;
+import models.jpa.JPAConditionReport;
+import models.jpa.JPARental;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.OperatorService;
 import javafx.scene.control.TextField;
-import application.MainApp;
+import Database.jpa.get;
+import Database.jpa.update;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
@@ -54,14 +55,15 @@ public class EndRentalController {
             ReportStage reportStageValue = reportStageComboBox.getValue();
             DamageLevel damageLevelValue = damageLevelComboBox.getValue();
 
-            Rental rental = DBQueries.getRentalById(rentalIdValue); //load rental from DB
-            Car car = DBQueries.getCarById(rental.getCarID()); //load car from DB
+            JPARental rental = get.getRentalById(rentalIdValue); //load rental from DB
+            JPACar car = get.getCarById(rental.getCarID()); //load car from DB
             int rentalDaysValue = (int) ChronoUnit.DAYS.between(rental.getRentDate(), returnDateValue); //compute rental days
             //tax Calculator
             double totalCost = operatorService.taxCalculator(car,rentalDaysValue,returnMileageValue,damageLevelValue);
             //end condition report
-            ConditionReport endReport = new ConditionReport(reportIdValue,rentalIdValue,scratchesValue,interiorDamageValue,tireConditionValue,notesValue,reportStageValue);
-            DBQueries.updateMileage(rentalIdValue,returnMileageValue); //update with final mileage
+            JPAConditionReport endReport = new JPAConditionReport(reportIdValue,rentalIdValue,scratchesValue,interiorDamageValue,tireConditionValue,notesValue,reportStageValue);
+            update.updateMileage(rentalIdValue,returnMileageValue); //update with final mileage
+            update.updateMileageCar(rental.getCarID(), returnMileageValue); //update Car with extra mileage
             //end rental method
             operatorService.endRental(rental,endReport,returnDateValue,totalCost);
 

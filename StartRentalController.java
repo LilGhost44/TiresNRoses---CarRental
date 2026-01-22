@@ -1,20 +1,20 @@
 package controller;
 
-import Models.ConditionReport;
-import Models.Rental;
+import Database.jpa.jpa;
+import jakarta.persistence.EntityManager;
+import models.jdbc.ConditionReport;
+import models.jdbc.Rental;
 import application.MainApp;
-import enums.CarClass;
-import enums.Category;
 import enums.ReportStage;
 import enums.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import models.jpa.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.OperatorService;
 import javafx.scene.control.TextField;
 
-import java.awt.*;
 import java.time.LocalDate;
 
 public class StartRentalController {
@@ -64,8 +64,10 @@ public class StartRentalController {
         String notesValue = notes.getText();
         ReportStage reportStageValue = reportStageComboBox.getValue();
 
-        Rental rental = new Rental(rentalIdValue,clientIdValue,carIdValue,operatorIdValue,rentDateValue,expectedReturnDateValue,returnDateValue,initMileageValue,rentalStatusValue,totalCostValue);
-        ConditionReport startReport = new ConditionReport(reportIdValue,rentalIdValue,scratchesValue,interiorDamageValue,tireConditionValue,notesValue,reportStageValue);
+            EntityManager em = jpa.getEntityManager();
+
+        JPARental rental = new JPARental(rentalIdValue,em.find(JPAClient.class, clientIdValue),em.find(JPACar.class, carIdValue),em.find(JPAUser.class, operatorIdValue),rentDateValue,expectedReturnDateValue,returnDateValue,initMileageValue,rentalStatusValue,totalCostValue);
+        JPAConditionReport startReport = new JPAConditionReport(reportIdValue,rentalIdValue,scratchesValue,interiorDamageValue,tireConditionValue,notesValue,reportStageValue);
         operatorService.startRental(rental,startReport);
 
             logger.info("Rental and condition report entered successfully: "+ rentalIdValue +" "+rentDateValue);

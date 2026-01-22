@@ -1,20 +1,22 @@
 package controller;
 
-import Database.DBQueries;
-import Models.Car;
-import Models.Rental;
-import Models.RentedCarStatistics;
+
+import Database.jpa.get;
+import javafx.collections.FXCollections;
+import models.jpa.JPARentedCarStatistics;
 import application.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import java.util.List;
+
 public class CarStatisticsController {
-    @FXML private TableView<RentedCarStatistics> statsTable;
-    @FXML private TableColumn<RentedCarStatistics, String> brandCol;
-    @FXML private TableColumn<RentedCarStatistics, String> modelCol;
-    @FXML private TableColumn<RentedCarStatistics, Integer> timesRentedCol;
+    @FXML private TableView<JPARentedCarStatistics> statsTable;
+    @FXML private TableColumn<JPARentedCarStatistics, String> brandCol;
+    @FXML private TableColumn<JPARentedCarStatistics, String> modelCol;
+    @FXML private TableColumn<JPARentedCarStatistics, Integer> timesRentedCol;
 
 
     @FXML
@@ -26,9 +28,10 @@ public class CarStatisticsController {
 
         loadStatistics();
     }
-    private void loadStatistics() {
-        statsTable.getItems().setAll(DBQueries.reportRentedCarStatistics());
 
+    private void loadStatistics() {
+        List<JPARentedCarStatistics> statistics = get.getRentedCarStatistics();
+        statsTable.setItems(FXCollections.observableArrayList(statistics));
     }
 
     public void handleBack(){

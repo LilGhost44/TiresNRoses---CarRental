@@ -1,14 +1,11 @@
 package controller;
 
-import Models.Company;
 import application.MainApp;
 import javafx.fxml.FXML;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.AdminService;
 import javafx.scene.control.TextField;
-
-import java.awt.*;
 
 public class CreateCompanyController {
     @FXML private TextField companyNameField;

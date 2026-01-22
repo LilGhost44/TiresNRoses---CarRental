@@ -1,25 +1,31 @@
-package Models;
+package models.jpa;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+
+/*Client class for loading client ratings*/
 
 public class ClientRating {
-    private int clientId;
-    private String clientName;
-    private int rating;
 
-    public ClientRating(int clientId, String clientName, int rating) {
-        this.clientId = clientId;
-        this.clientName = clientName;
+    private int clientID;
+    private String name;
+    private double rating;
+
+    public ClientRating(int clientID, String name, double rating) {
+        this.clientID = clientID;
+        this.name = name;
         this.rating = rating;
     }
 
     public int getClientId() {
-        return clientId;
+        return clientID;
     }
 
     public String getClientName() {
-        return clientName;
+        return name;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 }

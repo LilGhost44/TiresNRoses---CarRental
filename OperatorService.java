@@ -1,20 +1,26 @@
 package service;
 
 
-import Database.*;
-import Models.*;
+import Database.jdbc.DBQueries;
+import Database.jpa.exist;
+import Database.jpa.other;
 import enums.*;
+import models.jdbc.*;
+import models.jpa.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import Database.jpa.insert;
+import Database.jpa.update;
 
 import java.time.LocalDate;
+
+/*Class that contains all the methods regarding the Operator operations*/
 
 public class OperatorService {
     private static final Logger logger = LogManager.getLogger(OperatorService.class);
 
-    public void registerClient(Client client) {
-
-        if(DBQueries.insertClient(client)>0){
+    public void registerClient(JPAClient client) {
+        if(insert.insertClient(client)){
             logger.info("Client registration completed: " +client.getName()+" with id: "+client.getClientID());
         }else{logger.warn("Client registration failed.");}
 
@@ -23,58 +29,53 @@ public class OperatorService {
         }
     }  //Register Client to Database
 
-    public void startRental(Rental rental, ConditionReport startReport) {
-        if(DBQueries.insertRental(rental)>0){
+    public void startRental(JPARental rental, JPAConditionReport startReport) {
+        if(insert.insertRental(rental)){
             logger.info("Rental started. ID: "+rental.getRentalID());
         }else{logger.error("Rental failed to start.");}
-        if(DBQueries.insertConditionReport(startReport)>0){
-            DBQueries.updateCarStatus(rental.getCarID(), "RENTED");    //New rental, change status to Rented
+        if(insert.insertConditionReport(startReport)){
+            //DBQueries.updateCarStatus(rental.getCarID(), "RENTED");    //New rental, change status to Rented
+           update.updateCarStatus(rental.getCarID(),CarStatus.RENTED);
             logger.info("Condition report created.");}
         else{logger.error("Condition report failed.");};
 
     }
 
-    public void endRental(Rental rental, ConditionReport endReport, LocalDate returnDate,Double cost) { //As in car return
-        DBQueries.insertConditionReport(endReport);
+    public void endRental(JPARental rental, JPAConditionReport endReport, LocalDate returnDate,Double cost) { //As in car return
+        //DBQueries.insertConditionReport(endReport);
+        insert.insertConditionReport(endReport);
 
-        /*for (Damage d : damage) {
-            if(DBQueries.insertDamage(d)>0){System.out.println("Damage registered.");}
-            else{System.out.println("Damage registration failed.");}};*/
-
-
-
-        if(DBQueries.completeRental(rental, endReport)>0){
+        if(other.completeRental(rental,endReport)>0){
             logger.info("Rental Completed.");
         }else{logger.warn("Rental completion failed.");}
-        if(DBQueries.updateCarStatus(rental.getCarID(), "AVAILABLE")>0){
+        if(update.updateCarStatus(rental.getCarID(), CarStatus.AVAILABLE)==0){
             logger.info("Car status update to AVAILABLE.");
         }else{logger.warn("Status update failed.");} //set car to AVAILABLE
-        if(DBQueries.updateRentalStatus(rental.getRentalID())>0){
+        if(update.updateRentalStatus(rental.getRentalID())>0){
             logger.info("Rental status set to COMPLETED.");
         }else{logger.warn("Status did not get updated.");} //set rental to COMPLETED
-        if(DBQueries.updateReturnDate(rental.getRentalID(), returnDate)>0){
+        if(update.updateReturnDate(rental.getRentalID(), returnDate)>=0){
             rental.setReturnDate(returnDate);
             logger.info("Return date updated: "+returnDate);
         }else{logger.warn("Return date did not get updated.");} //update with the actual returnDate
-        if(DBQueries.updateCost(rental.getRentalID(),cost)>0){
+
+        if(update.updateCost(rental.getRentalID(),cost)>0){
             rental.setTotalCost(cost);
             logger.info("Cost updated: "+cost);
-        }else{logger.warn("Cost did not get updated.");} //update with the actual returnDate
+        }else{logger.warn("Cost did not get updated.");}
 
         if (rental.getReturnDate()
                 .isAfter(rental.getExpectedReturnDate())) {
             logger.warn("Caution: This rental is expired!!!");
-            DBQueries.increaseClientRating(rental.getClientID(), 2);
+            other.increaseClientRating(rental.getClientID(), 2);
         }
 
     }
-    public void registerCar(Car car, CarCharacteristics ch) {
-        if(DBQueries.insertCar(car)>0){logger.info("Car registration complete. ID: "+car.getCarID()+" ,Details: "+car.getBrand()+" ,"+car.getModel());}
+    public void registerCar(JPACar car, JPACarCharacteristics ch) {
+        if(insert.insertCar(car,ch)){logger.info("Car registration complete. ID: "+car.getCarID()+" ,Details: "+car.getBrand()+" ,"+car.getModel());}
        else{logger.error("Car registration failed.");}
-        if(DBQueries.insertCarCharacteristics(ch)>0){logger.info("Car characteristics registration complete.");}
-        else{logger.error("Car characteristics registration failed.");}
     }
-    public double taxCalculator(Car car, int rentalDays, int mileage, DamageLevel damageLevel) {
+    public double taxCalculator(JPACar car, int rentalDays, int mileage, DamageLevel damageLevel) {
         double base = getDailyRate(car.getCategory());
         double mileageRate = getMileage(car.getCarClass());
         double cost = (rentalDays * base) + (mileage * mileageRate);
@@ -112,11 +113,10 @@ public class OperatorService {
     }
     //authentication of operator
     public static boolean authenticate(int id, String username) {
-        boolean exists = DBQueries.operatorExists(id, username);
+        boolean exists = exist.operatorExists(id, username);
         if (!exists) {
             logger.warn("Authentication failed for user {}", username);
         }
         return exists;
-
     }
 }

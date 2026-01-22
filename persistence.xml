@@ -1,0 +1,41 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             version="3.0">
+
+    <persistence-unit name="CarRentalPU">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>models.jpa.JPACar</class>
+        <class>models.jpa.JPACarCharacteristics</class>
+        <class>models.jpa.JPAClient</class>
+        <class>models.jpa.ClientRating</class>
+        <class>models.jpa.JPACompany</class>
+        <class>models.jpa.JPAConditionReport</class>
+        <class>models.jpa.OperatorActivity</class>
+        <class>models.jpa.JPARental</class>
+        <class>models.jpa.RentalHistory</class>
+        <class>models.jpa.JPARentedCarStatistics</class>
+        <class>models.jpa.JPAUser</class>
+
+        <properties>
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="oracle.jdbc.OracleDriver"/>
+
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:oracle:thin:@localhost:1521:XE"/>
+
+            <property name="jakarta.persistence.jdbc.user"
+                      value="emma"/>
+
+            <property name="jakarta.persistence.jdbc.password"
+                      value="23221030"/>
+
+            <property name="hibernate.dialect"
+                      value="org.hibernate.dialect.OracleDialect"/>
+
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+        </properties>
+
+    </persistence-unit>
+</persistence>

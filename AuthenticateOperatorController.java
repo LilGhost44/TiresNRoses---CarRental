@@ -1,12 +1,11 @@
 package controller;
 
-import Database.DBQueries;
+import Database.jdbc.DBQueries;
 import application.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import service.AdminService;
 import service.OperatorService;
 
 public class AuthenticateOperatorController {

@@ -1,16 +1,13 @@
 package controller;
 
-import Models.Client;
+import models.jdbc.Client;
 import application.MainApp;
 import javafx.fxml.FXML;
+import models.jpa.JPAClient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import service.AdminService;
 import service.OperatorService;
 import javafx.scene.control.TextField;
-
-
-import java.awt.*;
 
 public class RegisterClientController {
     @FXML private TextField clientID;
@@ -30,7 +27,7 @@ public class RegisterClientController {
             String clientEMail = clientEmail.getText();
             double clientRAting = Double.parseDouble(clientRating.getText());
 
-            Client client = new Client(clientId,clientNAme,clientPHone,clientEMail,clientRAting);
+            JPAClient client = new JPAClient(clientId,clientNAme,clientPHone,clientEMail,clientRAting);
             operatorService.registerClient(client);
 
             logger.info("Client registered: "+ clientNAme);

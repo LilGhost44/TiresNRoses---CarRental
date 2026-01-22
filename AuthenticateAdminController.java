@@ -24,7 +24,7 @@ public class AuthenticateAdminController {
             boolean authenticated = AdminService.authenticate(id, username);
 
             if (authenticated) {
-                logger.info("User"+username+ "logged in as ADMINISTRATOR");
+                logger.info("User "+username+ " logged in as ADMINISTRATOR");
                     MainApp.loadAdminDashboard();
             } else {
                 logger.warn("Failed login attempt for user {}", username);

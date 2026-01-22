@@ -1,19 +1,18 @@
 package controller;
 
-import Models.Car;
-import Models.CarCharacteristics;
-import Models.Client;
+import models.jdbc.Car;
+import models.jdbc.CarCharacteristics;
 import enums.*;
 import application.MainApp;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import models.jpa.JPACar;
+import models.jpa.JPACarCharacteristics;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import service.OperatorService;
 import javafx.scene.control.TextField;
-
-import java.awt.*;
 
 public class RegisterCarController {
     @FXML private TextField carID;
@@ -33,7 +32,7 @@ public class RegisterCarController {
     @FXML private TextField carKmRate;
     @FXML private TextField carMileage;
     //@FXML private TextField carStatus;
-    @FXML private ComboBox<Status> carStatusBox;
+    @FXML private ComboBox<CarStatus> carStatusBox;
 
     @FXML private TextField carFuelType;
     @FXML private TextField carGearBox;
@@ -44,7 +43,7 @@ public class RegisterCarController {
     public void initialize() {
         carClassBox.getItems().setAll(CarClass.values());
         carCategoryBox.getItems().setAll(Category.values());
-        carStatusBox.getItems().setAll(Status.values());
+        carStatusBox.getItems().setAll(CarStatus.values());
     }
 
     private final OperatorService operatorService = new OperatorService();
@@ -57,36 +56,33 @@ public class RegisterCarController {
             String carMOdel = carModel.getText();
             int carYEar = Integer.parseInt(carYear.getText());
 
-           // String carCLass = carClass.getText().toUpperCase();
-            //CarClass carClassEnum = CarClass.valueOf(carCLass);
+
             CarClass carClass = carClassBox.getValue();
 
-           // String carCAtegory = carCategory.getText().toUpperCase();
-           // Category carCategoryEnum = Category.valueOf(carCAtegory);
+
             Category category = carCategoryBox.getValue();
 
-           // boolean carSMoking = Boolean.parseBoolean(carSmoking.getText());
+
             boolean carSmokingValue = carSmoking.isSelected();
             double carDAilyRate = Double.parseDouble(carDailyRate.getText());
             double carKMRate = Double.parseDouble(carKmRate.getText());
             int carMIleage = Integer.parseInt(carMileage.getText());
 
-            //String carSTatus = carStatus.getText().toUpperCase();
-           // Status carStatusEnum = Status.valueOf(carSTatus);
-            Status status = carStatusBox.getValue();
+            CarStatus carStatus = carStatusBox.getValue();
 
             String carFUelType = carFuelType.getText();
             String carGEarBox = carGearBox.getText();
             int carHOrsepower = Integer.parseInt(carHorsePower.getText());
             String carCOlor = carColor.getText();
 
-            if (carClass == null || category == null || status == null) {
+            if (carClass == null || category == null || carStatus == null) {
                 logger.error("Please select class, category and status");
                 return;
             }
 
-            Car car = new Car(carId,carBRand,carMOdel,carYEar,carClass,category,carSmokingValue,carDAilyRate,carKMRate,carMIleage,status);
-            CarCharacteristics characteristics = new CarCharacteristics(carId,carFUelType,carGEarBox,carHOrsepower,carCOlor);
+            JPACar car = new JPACar(carId,carBRand,carMOdel,carYEar,carClass,category,carSmokingValue,carDAilyRate,carKMRate,carMIleage,carStatus);
+            JPACarCharacteristics characteristics = new JPACarCharacteristics(carFUelType, carGEarBox, carHOrsepower, carCOlor);
+            characteristics.setCar(car);
             operatorService.registerCar(car,characteristics);
 
             logger.info("Car and characteristics registered: "+ carBRand +" "+carMOdel);
@@ -104,10 +100,10 @@ public class RegisterCarController {
 
         } catch (NumberFormatException e) {
             logger.warn("Invalid car ID input", e);
-            //showError("Invalid Input", "Company ID must be a number");
+
         } catch (Exception e) {
             logger.error("Failed to register car or its characteristics", e);
-            // showError("Error", "Could not create company");
+
         }
     }
     public void handleBack(){

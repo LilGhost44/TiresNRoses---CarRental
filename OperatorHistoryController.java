@@ -1,13 +1,17 @@
 package controller;
-import Database.DBQueries;
-import Models.*;
+
+import Database.jpa.get;
 import application.MainApp;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import models.jpa.OperatorActivity;
+import models.jpa.RentalHistory;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class OperatorHistoryController {
     @FXML private TableView<OperatorActivity> activityTable;
@@ -22,17 +26,18 @@ public class OperatorHistoryController {
     @FXML
     public void initialize() {
 
-        operatorIdCol.setCellValueFactory(new PropertyValueFactory<>("operatorId"));
-        operatorCol.setCellValueFactory(new PropertyValueFactory<>("operatorUsername"));
-        rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rentalId"));
+        operatorIdCol.setCellValueFactory(new PropertyValueFactory<>("userID"));
+        operatorCol.setCellValueFactory(new PropertyValueFactory<>("username"));
+        rentalIdCol.setCellValueFactory(new PropertyValueFactory<>("rentalID"));
         rentDateCol.setCellValueFactory(new PropertyValueFactory<>("rentDate"));
         costCol.setCellValueFactory(new PropertyValueFactory<>("totalCost"));
-        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("rentalStatus"));
 
         loadActivity();
     }
     private void loadActivity() {
-        activityTable.getItems().setAll(DBQueries.reportOperatorActivity());
+        List<OperatorActivity> activity = get.getOperatorActivity();
+        activityTable.setItems(FXCollections.observableArrayList(activity));
     }
     public void handleBack(){
         try{

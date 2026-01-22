@@ -1,44 +1,58 @@
-package Models;
+package models.jpa;
+import enums.RentalStatus;
+
 import java.time.LocalDate;
 
+/*Class for rental history, for loading data*/
+
 public class RentalHistory {
-    private int rentalId;
+    private Integer rentalID; //wrappers
     private String brand;
-    private String carModel;
-    private String clientName;
+    private String model;
+    private String name;
     private LocalDate rentDate;
     private LocalDate expectedReturnDate;
     private LocalDate returnDate;
-    private double totalCost;
-    private String status;
+    private Double totalCost;
+    private RentalStatus rentalStatus;
 
 
-    public RentalHistory(int rentalId, String brand, String carModel, String clientName, LocalDate rentDate, LocalDate expectedReturnDate, LocalDate returnDate, double totalCost, String status) {
-        this.rentalId = rentalId;
+    public RentalHistory(
+            Integer rentalID,
+            String brand,
+            String model,
+            String name,
+            LocalDate rentDate,
+            LocalDate expectedReturnDate,
+            LocalDate returnDate,
+            Double totalCost,
+            RentalStatus rentalStatus
+    ) {
+        this.rentalID = rentalID;
         this.brand = brand;
-        this.carModel = carModel;
-        this.clientName = clientName;
+        this.model = model;
+        this.name = name;
         this.rentDate = rentDate;
         this.expectedReturnDate = expectedReturnDate;
         this.returnDate = returnDate;
         this.totalCost = totalCost;
-        this.status = status;
+        this.rentalStatus = rentalStatus;
     }
 
-    public int getRentalId() {
-        return rentalId;
+    public int getRentalID() {
+        return rentalID;
     }
 
     public String getBrand() {
         return brand;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getModel() {
+        return model;
     }
 
-    public String getClientName() {
-        return clientName;
+    public String getName() {
+        return name;
     }
 
     public LocalDate getRentDate() {
@@ -57,8 +71,8 @@ public class RentalHistory {
         return totalCost;
     }
 
-    public String getStatus() {
-        return status;
+    public RentalStatus getRentalStatus() {
+        return rentalStatus;
     }
 }
 
